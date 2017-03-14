@@ -1,35 +1,34 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {Observer} from 'rxjs/Observer';
 import 'rxjs/add/operator/share';
 import {Article} from './article';
+import {Http} from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+
+const URL = 'http://localhost:3000/articles';
 
 @Injectable()
 export class ArticleService {
 
-  articles: Article[];
-
-  constructor() {
-    this.articles = [
-      {
-        title: "Test 1",
-        content: "Tout va bien"
-      },
-      {
-        title: "Test 2",
-        content: "Toujours ok"
-      }
-    ];
+  constructor(private http: Http) {
   }
 
-  getArticles() {
-    return this.articles;
+  getArticles(): Promise<Article[]> {
+    return this.http.get(`${URL}`).toPromise().then(response => response.json());
   }
 
-  save(article) {
-    console.log(article);
-    this.articles.push(article);
-    console.log(this.articles);
+  getArticle(id: number): Promise<Article> {
+    return this.http.get(`${URL}/${id}`).toPromise().then(response => response.json());
+  }
+
+  save(article: Article): Promise<Article> {
+    return article.id
+      ? this.http.put(`${URL}/${article.id}`, article).toPromise().then(response => response.json())
+      : this.http.post(`${URL}`, article).toPromise().then(response => response.json());
+  }
+
+  remove(id: number): Promise<void> {
+    console.log(id);
+    return this.http.delete(`${URL}/${id}`).toPromise();
   }
 
 

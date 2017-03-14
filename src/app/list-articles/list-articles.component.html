@@ -3,6 +3,20 @@
 
   <div *ngFor="let article of articles">
     <h2> {{article.title }} </h2>
+    <h3>
+      <small class="text-right">
+        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+        {{article.creationDate | date:'short' }}
+      </small>
+      <button type="button" class="btn btn-primary btn-sm" [routerLink]="['../edit', article.id]">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        Edit
+      </button>
+      <button type="button" class="btn btn-danger btn-sm" (click)="remove(article.id)">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        Remove
+      </button>
+    </h3>
     <p>
       {{ article.content}}
     </p>

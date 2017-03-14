@@ -13,15 +13,25 @@
     </div>
     <div class="form-group">
       <label for="image">Image</label>
-      <input type="file" multiple="multiple" accept="image/*" (change)="handleInputChange($event)" class="form-control"
+      <input type="file" accept="image/*" multiple="multiple" (change)="handleInputChange($event)" class="form-control"
              id="image">
     </div>
-    <button type="button" [disabled]="!articleForm.form.valid" (click)="save(article)" class="btn btn-success">Post
-    </button>
-    <button type="button" (click)="clear()" class="btn btn-primary">Clear</button>
+    <div *ngIf="article.photos" class="form-group">
+      <img *ngFor="let photo of article.photos" width="200px" height="200px" id="preview" src="{{photo}}" alt="Preview"
+           class="img-rounded">
+    </div>
+    <!--<app-image-uploader [activeColor]="'orangered'" [baseColor]="'lightgray'" [(imageSrc)]="article.photos"></app-image-uploader>-->
+    <div class="form-group">
+      <button type="button" [disabled]="!articleForm.form.valid" (click)="save(article)" class="btn btn-success">Post
+      </button>
+      <button type="button" (click)="clear()" class="btn btn-primary">Clear</button>
+    </div>
   </form>
+
+  <pre>  {{ article | json }} </pre>
+
 </div>
 
-<pre>  {{ article | json }} </pre>
+
 
 

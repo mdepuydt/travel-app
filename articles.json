@@ -1,0 +1,49 @@
+{
+  "articles": [
+    {
+      "title": "Test 1",
+      "content": "Tout va bien, c'est pas vrai",
+      "creationDate": "2017-03-10T18:50:28.738Z",
+      "id": 1
+    },
+    {
+      "title": "Test 3 ",
+      "content": "Blabla",
+      "creationDate": "2017-03-06T18:23:39.060Z",
+      "id": 2
+    },
+    {
+      "title": "Test 1",
+      "content": "Je ne suis pas contente",
+      "creationDate": "2017-03-06T18:27:07.073Z",
+      "id": 3
+    },
+    {
+      "title": "Test 3",
+      "content": "Blabla",
+      "creationDate": "2017-03-06T18:41:42.829Z",
+      "id": 5
+    },
+    {
+      "title": "Trop rapide",
+      "content": "Je crois bien\n",
+      "creationDate": "2017-03-06T18:42:30.665Z",
+      "id": 5
+    },
+    {
+      "title": "Toujours trop rapide?",
+      "content": "Oui ? ",
+      "creationDate": "2017-03-06T18:43:55.319Z",
+      "id": 6
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "mdepuydt",
+      "password": "root",
+      "firstName": "marion",
+      "lastName": "DEPUYDT"
+    }
+  ]
+}

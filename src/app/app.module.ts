@@ -11,13 +11,19 @@ import { AppComponent } from './app.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {ListArticlesComponent} from './list-articles/list-articles.component';
 import {EditArticleComponent} from './edit-article/edit-article.component';
+import {ImageUploaderComponent} from './edit-article/image-uploader/image-uploader.component';
+
+import * as FileSaver from 'file-saver';
+import {AuthentificationComponent} from './authentification/authentification.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     ListArticlesComponent,
-    EditArticleComponent
+    EditArticleComponent,
+    ImageUploaderComponent,
+    AuthentificationComponent
   ],
   imports: [
     BrowserModule,
