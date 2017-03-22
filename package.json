@@ -7,8 +7,10 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
+    "http-server": "json-server articles.json",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "run": "concurrently --kill-others \"npm run start\" \"npm run http-server\""
   },
   "private": true,
   "dependencies": {
@@ -34,6 +36,7 @@
     "@types/node": "~6.0.60",
     "bootstrap": "^3.3.7",
     "codelyzer": "~2.0.0",
+    "concurrently": "^3.4.0",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
     "karma": "~1.4.1",

@@ -6,6 +6,8 @@ import { HttpModule } from '@angular/http';
 import {AppRoutingModule} from './app-routing.module';
 
 import {ArticleService} from './article.service';
+import {AuthentificationService} from './authentification.service';
+import {UsersService} from './users.service';
 
 import { AppComponent } from './app.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
@@ -31,7 +33,11 @@ import {AuthentificationComponent} from './authentification/authentification.com
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ArticleService],
+  providers: [
+    ArticleService,
+    AuthentificationService,
+    UsersService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

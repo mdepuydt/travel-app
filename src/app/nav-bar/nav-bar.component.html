@@ -15,10 +15,18 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li routerLinkActive="active"><a routerLink="/list">Articles</a></li>
-        <li routerLinkActive="active"><a routerLink="/edit">Create</a></li>
+        <li *ngIf="currentUser.firstName" routerLinkActive="active">
+          <a routerLink="/edit">Create</a>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
+        <li *ngIf="currentUser && currentUser.firstName">
+          <a>Hi {{ currentUser.firstName }} {{ currentUser.lastName }}</a>
+        </li>
+        <li *ngIf="currentUser && currentUser.firstName">
+          <button (click)="logOut()" class="btn btn-default navbar-btn">Log out</button>
+        </li>
+        <li *ngIf="!currentUser.firstName">
           <button routerLink="/auth" class="btn btn-default navbar-btn">Log in</button>
         </li>
       </ul>

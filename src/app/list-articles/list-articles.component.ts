@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
-import  {Article} from '../article';
+import {Article} from '../article';
 import {ArticleService} from '../article.service';
+import {AuthentificationService} from '../authentification.service';
+
+import {User} from '../user';
 
 @Component({
   selector: 'app-list-articles',
@@ -11,15 +14,20 @@ import {ArticleService} from '../article.service';
 })
 export class ListArticlesComponent implements OnInit {
 
+  currentUser: User;
   articles: Article[] = [];
 
   constructor(private articleService: ArticleService,
+              private authService: AuthentificationService,
               private router: Router) {
-
+    this.clear();
   }
 
   ngOnInit() {
-    //this.articles = this.route.snapshot.data['articles'];
+    this.authService.updates().subscribe((user) => {
+      this.currentUser = user;
+      console.log(this.currentUser);
+    });
     this.fetchArticles();
   }
 
@@ -38,6 +46,13 @@ export class ListArticlesComponent implements OnInit {
   private fetchArticles(): Promise<Article[]> {
     return this.articleService.getArticles()
       .then(articles => this.articles = articles);
+  }
+
+  private clear() {
+    this.currentUser = {
+      'username': '',
+      'password': ''
+    }
   }
 
 

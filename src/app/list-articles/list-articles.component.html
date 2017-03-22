@@ -8,11 +8,13 @@
         <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
         {{article.creationDate | date:'short' }}
       </small>
-      <button type="button" class="btn btn-primary btn-sm" [routerLink]="['../edit', article.id]">
+      <button *ngIf="currentUser && currentUser.firstName" type="button" class="btn btn-primary btn-sm"
+              [routerLink]="['../edit', article.id]">
         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
         Edit
       </button>
-      <button type="button" class="btn btn-danger btn-sm" (click)="remove(article.id)">
+      <button *ngIf="currentUser && currentUser.firstName" type="button" class="btn btn-danger btn-sm"
+              (click)="remove(article.id)">
         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
         Remove
       </button>
