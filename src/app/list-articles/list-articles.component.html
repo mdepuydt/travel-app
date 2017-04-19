@@ -1,28 +1,48 @@
 <div class="container">
   <h1>Last Posts</h1>
-
-  <div *ngFor="let article of articles">
-    <h2> {{article.title }} </h2>
-    <h3>
-      <small class="text-right">
-        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-        {{article.creationDate | date:'short' }}
-      </small>
-      <button *ngIf="currentUser && currentUser.firstName" type="button" class="btn btn-primary btn-sm"
-              [routerLink]="['../edit', article.id]">
-        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-        Edit
-      </button>
-      <button *ngIf="currentUser && currentUser.firstName" type="button" class="btn btn-danger btn-sm"
-              (click)="remove(article.id)">
-        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-        Remove
-      </button>
-    </h3>
-    <p>
-      {{ article.content}}
-    </p>
+  <div class="panel panel-default" *ngFor="let article of articles">
+    <div class="panel-body">
+      <h2> {{article.title }} </h2>
+      <h3>
+        <small class="text-right">
+          <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+          {{article.creationDate | date:'short' }}
+        </small>
+        <button *ngIf="currentUser && currentUser.firstName" type="button" class="btn btn-primary btn-sm"
+                [routerLink]="['../edit', article.id]">
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+          Edit
+        </button>
+        <button *ngIf="currentUser && currentUser.firstName" type="button" class="btn btn-danger btn-sm"
+                (click)="remove(article.id)">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          Remove
+        </button>
+      </h3>
+      <!--<agm-map [latitude]="article.location.latitude" [longitude]="article.location.longitude" [scrollwheel]="false" [zoom]="zoom">-->
+      <!--<agm-marker [latitude]="article.location.latitude" [longitude]="article.location.longitude"></agm-marker>-->
+      <!--</agm-map>-->
+      <span *ngIf="article.location">
+      <agm-map [latitude]="article.location.latitude" [longitude]="article.location.longitude" [scrollwheel]="false"
+               [zoom]="zoom">
+        <agm-marker [latitude]="article.location.latitude" [longitude]="article.location.longitude"></agm-marker>
+      </agm-map>
+        </span>
+      <!--<button *ngIf="article.location" type="button" (click)="showMap(article.id, article.location)" class="btn btn-primary">Show location</button>-->
+      <!--<div [ngClass]="classes" *ngIf="article.location" id="googleMap{{article.id}}">-->
+      <!--</div>-->
+      <div *ngIf="article.photos" class="container">
+        <img *ngFor="let photo of article.photos" src="{{photo}}" class="img-responsive" alt="Responsive image">
+      </div>
+      <p>
+        {{ article.content}}
+      </p>
+    </div>
   </div>
+
+  <!--<agm-map [latitude]="articles[0].location.latitude" [longitude]="articles[0].location.longitude" [scrollwheel]="false" [zoom]="zoom">-->
+  <!--<agm-marker [latitude]="articles[0].location.latitude" [longitude]="articles[0].location.longitude"></agm-marker>-->
+  <!--</agm-map>-->
 
   <pre> {{ articles | json }}</pre>
 </div>

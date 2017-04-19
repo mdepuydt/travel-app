@@ -1,22 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
+import {AgmCoreModule} from "@agm/core";
 import {AppRoutingModule} from './app-routing.module';
 
 import {ArticleService} from './article.service';
 import {AuthentificationService} from './authentification.service';
 import {UsersService} from './users.service';
+import {GeolocationService} from './geolocation.service';
 
 import { AppComponent } from './app.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {ListArticlesComponent} from './list-articles/list-articles.component';
 import {EditArticleComponent} from './edit-article/edit-article.component';
 import {ImageUploaderComponent} from './edit-article/image-uploader/image-uploader.component';
-
-import * as FileSaver from 'file-saver';
 import {AuthentificationComponent} from './authentification/authentification.component';
+import {MapComponent} from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -25,18 +25,25 @@ import {AuthentificationComponent} from './authentification/authentification.com
     ListArticlesComponent,
     EditArticleComponent,
     ImageUploaderComponent,
-    AuthentificationComponent
+    AuthentificationComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyDZ2S6cgODh7I-nqZI0b-_oNgsZrXsOjA0",
+      libraries: ["places"]
+    }),
   ],
   providers: [
     ArticleService,
     AuthentificationService,
-    UsersService
+    UsersService,
+    GeolocationService
   ],
   bootstrap: [AppComponent]
 })

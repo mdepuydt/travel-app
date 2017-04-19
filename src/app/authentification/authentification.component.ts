@@ -9,7 +9,7 @@ import {User} from '../user';
 @Component({
   selector: 'app-authentification',
   templateUrl: './authentification.component.html',
-  styleUrls: ['./authentification.component.css']
+  styleUrls: ['authentification.component.scss']
 })
 export class AuthentificationComponent implements OnInit {
 
@@ -40,7 +40,6 @@ export class AuthentificationComponent implements OnInit {
           this.wrongLogin = false;
           this.user = result;
           console.log("Success");
-          console.log(this.user);
           this.authService.setUser(this.user);
           this.router.navigate(['/edit']);
         } else {

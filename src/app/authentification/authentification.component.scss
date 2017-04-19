@@ -1,0 +1,33 @@
+@import '../../assets/variables/variables';
+
+.container {
+  padding-top: 2%;
+}
+
+.panel-primary {
+  border-color: $grey;
+}
+
+.panel-heading {
+  background-color: $grey;
+  border-color: $grey;
+}
+
+.btn-primary {
+  background-color: $grey;
+  border-color: $grey;
+}
+
+.btn-primary:hover {
+  background-color: $dark-green;
+  border-color: $dark-green;
+}
+
+//input#username:focus {
+//  border-color: $yellow;
+//}
+
+.form-control:focus {
+  border-color: $dark-green;
+  box-shadow: inset 0 1px 1px $dark-green, 0 0 8px $dark-green;
+}

@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@import "assets/variables/variables";
+
+$image: url('assets/img/road_trip.jpg');
+
+//body {
+//  height: 100%;
+//  padding-top: 70px;
+//  //background-color: $light-green;
+//  background-image: url('assets/img/road_trip.jpg');
+//  background-repeat: no-repeat;
+//  background-position: center;
+//  background-size: cover;
+//  color: $dark-grey;
+//
+//}
+
+body {
+  margin: 0;
+  padding: 0;
+  padding-top: 70px;
+  background: url('assets/img/pike.jpg') no-repeat center fixed;
+  background-position-y: 50px;
+  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  background-size: cover; /* version standardisée */
+}

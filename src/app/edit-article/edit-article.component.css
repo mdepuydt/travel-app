@@ -72,3 +72,7 @@
 .uploader img.loaded {
   opacity: 1;
 }
+
+agm-map {
+  height: 300px;
+}

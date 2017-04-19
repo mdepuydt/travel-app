@@ -1,5 +1,10 @@
 <div class="container">
   <div *ngIf="currentUser && currentUser.firstName">
+
+    <div class="alert alert-danger" [hidden]="!_imageTooBig">
+      <strong>Danger!</strong> The image is too big (>3Mo)
+    </div>
+
     <h1>Create an article</h1>
     <form #articleForm="ngForm">
       <div class="form-group">
@@ -14,18 +19,38 @@
       </div>
       <div class="form-group">
         <label for="image">Image</label>
-        <input type="file" accept="image/*" multiple="multiple" (change)="handleInputChange($event)"
+        <!-- TODO handle several photos in input multiple="multiple" -->
+        <input type="file" accept="image/*" (change)="handleInputChange($event)"
                class="form-control"
                id="image">
       </div>
-      <div *ngIf="article.photos" class="form-group">
-        <img *ngFor="let photo of article.photos" width="200px" height="200px" id="preview" src="{{photo}}"
+      <div *ngIf="photos" class="form-group">
+        <img *ngFor="let photo of photos" width="200px" height="200px" id="{{photo}}" src=""
              alt="Preview"
              class="img-rounded">
       </div>
-      <!--<app-image-uploader [activeColor]="'orangered'" [baseColor]="'lightgray'" [(imageSrc)]="article.photos"></app-image-uploader>-->
+      <div>
+        <button type="button" (click)="onPickAnotherDate()" class="btn btn-primary">Pick another date</button>
+        <input type="date"
+               *ngIf="anotherDate"
+               class="form-control" id="date"
+               [(ngModel)]="article.creationDate" name="date" #date="ngModel"
+        >
+      </div>
+      <div>
+        <span>
+        <div class="form-group">
+          <input placeholder="Start typing your address..." autocorrect="off" autocapitalize="off" spellcheck="off"
+                 type="text" class="form-control" #search [formControl]="searchControl">
+        </div>
+        <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+          <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+        </agm-map>
+          </span>
+      </div>
       <div class="form-group">
-        <button type="button" [disabled]="!articleForm.form.valid" (click)="save(article)" class="btn btn-success">Post
+        <button type="button" [disabled]="!articleForm.form.valid || _imageTooBig" (click)="onSave(article)"
+                class="btn btn-success">Post
         </button>
         <button type="button" (click)="clear()" class="btn btn-primary">Clear</button>
       </div>
@@ -34,6 +59,8 @@
   <div *ngIf="!currentUser || !currentUser.firstName" class="alert alert-danger" role="alert">
     You should be logged to see this content
   </div>
+  <pre> {{ latitude }}</pre>
+  <pre> {{ longitude }}</pre>
   <pre>  {{ article | json }} </pre>
 
 </div>

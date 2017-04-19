@@ -15,7 +15,9 @@
     "types": [
       "jasmine",
       "node",
-      "file-saver"
+      "file-saver",
+      "lz-string",
+      "../node_modules/@types/googlemaps"
     ]
   },
   "files": [

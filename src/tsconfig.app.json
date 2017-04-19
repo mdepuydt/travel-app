@@ -13,7 +13,13 @@
     "target": "es5",
     "module": "es2015",
     "baseUrl": "",
-    "types": []
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
+    "types": [
+      "node",
+      "../node_modules/@types/googlemaps"
+    ]
   },
   "exclude": [
     "test.ts",

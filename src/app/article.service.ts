@@ -3,8 +3,9 @@ import 'rxjs/add/operator/share';
 import {Article} from './article';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import {environment} from '../environments/environment';
 
-const URL = 'http://localhost:3000/articles';
+const URL = 'http://' + environment.host + ':3000/articles';
 
 @Injectable()
 export class ArticleService {
@@ -29,6 +30,11 @@ export class ArticleService {
   remove(id: number): Promise<void> {
     console.log(id);
     return this.http.delete(`${URL}/${id}`).toPromise();
+  }
+
+  savePhoto(photo: any) {
+    console.log(photo);
+    this.http.post(`${URL}`, photo).toPromise().then(response => response.json());
   }
 
 

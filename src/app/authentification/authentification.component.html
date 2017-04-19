@@ -1,7 +1,8 @@
 <div class="container col-sm-offset-2 col-sm-8">
   <h1 *ngIf="user.firstName"> Hi {{ user.firstName }} {{ user.lastName}}</h1>
   <div class="panel panel-primary ">
-    <div class="panel-heading">Sign In</div>
+    <div class="panel-heading">Sign In
+    </div>
     <div class="panel-body">
       <div *ngIf="wrongLogin" class="alert alert-danger" role="alert">
         Try again! Wrong password and /or username!
@@ -23,7 +24,9 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-5 col-sm-2">
-            <button type="submit" (click)="logIn(user)" class="btn btn-primary">Sign in</button>
+            <button type="submit" [disabled]="!authForm.form.valid" (click)="logIn(user)" class="btn btn-primary">Sign
+              in
+            </button>
           </div>
         </div>
       </form>
