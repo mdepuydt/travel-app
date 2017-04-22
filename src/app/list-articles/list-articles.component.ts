@@ -29,8 +29,11 @@ export class ListArticlesComponent implements OnInit {
   public zoom: number;
   currentUser: User;
   articles: Article[] = [];
-  showMapId: number;
   classes: Array<string> = ['hideMap'];
+
+  posts: number = 2;
+  page: number = 1;
+  total: number;
 
   constructor(private articleService: ArticleService,
               private authService: AuthentificationService,
@@ -57,19 +60,33 @@ export class ListArticlesComponent implements OnInit {
     this.router.navigate(['/edit']);
   }
 
-  private fetchArticles(): Promise<Article[]> {
-    return this.articleService.getArticles()
-      .then(articles => {
+  newerPosts() {
+    if (this.page > 1) {
+      this.page--;
+      this.fetchArticles();
+    }
+  }
+
+  olderPosts() {
+    this.page++;
+    this.fetchArticles();
+  }
+
+  private fetchArticles() {
+    this.articleService.getPageArticles(this.page, this.posts)
+      .then((articles) => {
+        console.log(articles);
         this.articles = articles;
-        this.articles.forEach(
-          (art) => {
-            if (art.compressedPhotos) {
-              for (let i = 0; i < art.compressedPhotos.length; i++) {
-                art.photos.push(LZString.decompress(art.compressedPhotos[i]));
-              }
-            }
-          }
-        )
+        this.total = this.articleService.getTotal();
+        // this.articles.forEach(
+        //   (art) => {
+        //     if (art.compressedPhotos) {
+        //       for (let i = 0; i < art.compressedPhotos.length; i++) {
+        //         art.photos.push(LZString.decompress(art.compressedPhotos[i]));
+        //       }
+        //     }
+        //   }
+        // )
       });
   }
 
@@ -78,22 +95,6 @@ export class ListArticlesComponent implements OnInit {
       'username': '',
       'password': ''
     }
-  }
-
-  showMap(id: number, location: Geolocation) {
-    this.classes = ['showMap'];
-    this.showMapId = id;
-    let mapOptions = {
-      center: new google.maps.LatLng(location.latitude, location.longitude),
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.TERRAIN
-    };
-    let map = new google.maps.Map(document.getElementById("googleMap" + id), mapOptions);
-    var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(location.latitude, location.longitude),
-      map: map,
-      title: 'Hello World!'
-    });
   }
 
 

@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Last Posts</h1>
+  <h1>Latest Posts</h1>
   <div class="panel panel-default" *ngFor="let article of articles">
     <div class="panel-body">
       <h2> {{article.title }} </h2>
@@ -19,18 +19,12 @@
           Remove
         </button>
       </h3>
-      <!--<agm-map [latitude]="article.location.latitude" [longitude]="article.location.longitude" [scrollwheel]="false" [zoom]="zoom">-->
-      <!--<agm-marker [latitude]="article.location.latitude" [longitude]="article.location.longitude"></agm-marker>-->
-      <!--</agm-map>-->
       <span *ngIf="article.location">
       <agm-map [latitude]="article.location.latitude" [longitude]="article.location.longitude" [scrollwheel]="false"
                [zoom]="zoom">
         <agm-marker [latitude]="article.location.latitude" [longitude]="article.location.longitude"></agm-marker>
       </agm-map>
         </span>
-      <!--<button *ngIf="article.location" type="button" (click)="showMap(article.id, article.location)" class="btn btn-primary">Show location</button>-->
-      <!--<div [ngClass]="classes" *ngIf="article.location" id="googleMap{{article.id}}">-->
-      <!--</div>-->
       <div *ngIf="article.photos" class="container">
         <img *ngFor="let photo of article.photos" src="{{photo}}" class="img-responsive" alt="Responsive image">
       </div>
@@ -39,10 +33,11 @@
       </p>
     </div>
   </div>
-
-  <!--<agm-map [latitude]="articles[0].location.latitude" [longitude]="articles[0].location.longitude" [scrollwheel]="false" [zoom]="zoom">-->
-  <!--<agm-marker [latitude]="articles[0].location.latitude" [longitude]="articles[0].location.longitude"></agm-marker>-->
-  <!--</agm-map>-->
-
-  <pre> {{ articles | json }}</pre>
+  <nav aria-label="...">
+    <ul class="pager">
+      <li [class.disabled]="page == 1"><a (click)="newerPosts()"><span aria-hidden="true">&larr;</span> Newer</a></li>
+      <li [class.disabled]="total <= (page * posts)"><a (click)="olderPosts()">Older <span
+        aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+  </nav>
 </div>
