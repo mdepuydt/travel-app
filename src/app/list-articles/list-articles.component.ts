@@ -22,7 +22,7 @@ declare var google: any;
 @Component({
   selector: 'app-list-articles',
   templateUrl: './list-articles.component.html',
-  styleUrls: ['./list-articles.component.css']
+  styleUrls: ['list-articles.component.scss']
 })
 export class ListArticlesComponent implements OnInit {
 
@@ -78,15 +78,6 @@ export class ListArticlesComponent implements OnInit {
         console.log(articles);
         this.articles = articles;
         this.total = this.articleService.getTotal();
-        // this.articles.forEach(
-        //   (art) => {
-        //     if (art.compressedPhotos) {
-        //       for (let i = 0; i < art.compressedPhotos.length; i++) {
-        //         art.photos.push(LZString.decompress(art.compressedPhotos[i]));
-        //       }
-        //     }
-        //   }
-        // )
       });
   }
 

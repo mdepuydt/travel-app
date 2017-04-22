@@ -22,10 +22,8 @@ export class ArticleService {
   }
 
   getArticles(): Promise<Article[]> {
-    return this.http.get(`${URL}?_sort=creationDate&_order=DESC`).toPromise().then(response => {
-      console.log(response);
-      response.json()
-    });
+    return this.http.get(`${URL}?_sort=creationDate&_order=DESC`).toPromise().then(response =>
+      response.json());
   }
 
   getPageArticles(page: number, limit: number): Promise<Article[]> {

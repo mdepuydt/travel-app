@@ -19,18 +19,19 @@
           Remove
         </button>
       </h3>
-      <span *ngIf="article.location">
-      <agm-map [latitude]="article.location.latitude" [longitude]="article.location.longitude" [scrollwheel]="false"
-               [zoom]="zoom">
-        <agm-marker [latitude]="article.location.latitude" [longitude]="article.location.longitude"></agm-marker>
-      </agm-map>
-        </span>
-      <div *ngIf="article.photos" class="container">
+
+      <span *ngIf="article.photos">
         <img *ngFor="let photo of article.photos" src="{{photo}}" class="img-responsive" alt="Responsive image">
-      </div>
+      </span>
       <p>
         {{ article.content}}
       </p>
+      <span *ngIf="article.location">
+        <agm-map [latitude]="article.location.latitude" [longitude]="article.location.longitude" [scrollwheel]="false"
+                 [zoom]="zoom">
+          <agm-marker [latitude]="article.location.latitude" [longitude]="article.location.longitude"></agm-marker>
+        </agm-map>
+      </span>
     </div>
   </div>
   <nav aria-label="...">
