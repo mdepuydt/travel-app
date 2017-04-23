@@ -2,7 +2,8 @@
 
   <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
     <span *ngFor="let loc of locations; let i = index;">
-          <agm-marker [latitude]="loc.latitude" [longitude]="loc.longitude" [label]="(i+1).toString()"></agm-marker>
+          <agm-marker [latitude]="loc.latitude" [openInfoWindow]="true" [longitude]="loc.longitude" [title]="Test"
+                      [label]="(i+1).toString()"></agm-marker>
     </span>
   </agm-map>
 </div>

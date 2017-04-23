@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {ListArticlesComponent} from './list-articles/list-articles.component';
 import {EditArticleComponent} from './edit-article/edit-article.component';
-import {ImageUploaderComponent} from './edit-article/image-uploader/image-uploader.component';
 import {AuthentificationComponent} from './authentification/authentification.component';
 import {MapComponent} from './map/map.component';
 
@@ -24,7 +23,6 @@ import {MapComponent} from './map/map.component';
     NavBarComponent,
     ListArticlesComponent,
     EditArticleComponent,
-    ImageUploaderComponent,
     AuthentificationComponent,
     MapComponent
   ],
