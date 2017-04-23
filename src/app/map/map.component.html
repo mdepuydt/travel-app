@@ -3,7 +3,16 @@
   <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
     <span *ngFor="let loc of locations; let i = index;">
           <agm-marker [latitude]="loc.latitude" [openInfoWindow]="true" [longitude]="loc.longitude" [title]="Test"
-                      [label]="(i+1).toString()"></agm-marker>
+                      [label]="(i+1).toString()">
+            <agm-info-window [latitude]="loc.latitude" [longitude]="loc.longitude">
+              <h4>{{loc.title}}</h4>
+        <small class="text-right">
+          <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+          {{loc.creationDate | date:'mediumDate' }}
+        </small>
+              <img src="{{loc.photo}}" class="img-responsive" alt="Responsive image">
+            </agm-info-window>
+          </agm-marker>
     </span>
   </agm-map>
 </div>
