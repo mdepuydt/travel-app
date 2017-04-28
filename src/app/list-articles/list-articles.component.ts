@@ -15,10 +15,6 @@ import {AuthentificationService} from '../authentification.service';
 
 import {User} from '../user';
 
-declare var LZString: any;
-declare var google: any;
-
-
 @Component({
   selector: 'app-list-articles',
   templateUrl: './list-articles.component.html',
@@ -27,11 +23,12 @@ declare var google: any;
 export class ListArticlesComponent implements OnInit {
 
   public zoom: number;
+  public loading: boolean
   currentUser: User;
   articles: Article[] = [];
   classes: Array<string> = ['hideMap'];
 
-  posts: number = 2;
+  posts: number = 1;
   page: number = 1;
   total: number;
 
@@ -73,11 +70,14 @@ export class ListArticlesComponent implements OnInit {
   }
 
   private fetchArticles() {
+    this.articles = [];
+    this.loading = true;
     this.articleService.getPageArticles(this.page, this.posts)
       .then((articles) => {
         console.log(articles);
         this.articles = articles;
         this.total = this.articleService.getTotal();
+        this.loading = false;
       });
   }
 

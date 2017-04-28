@@ -16,6 +16,7 @@ import {ListArticlesComponent} from './list-articles/list-articles.component';
 import {EditArticleComponent} from './edit-article/edit-article.component';
 import {AuthentificationComponent} from './authentification/authentification.component';
 import {MapComponent} from './map/map.component';
+import {LoadingWheelComponent} from './loading-wheel/loading-wheel.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {MapComponent} from './map/map.component';
     ListArticlesComponent,
     EditArticleComponent,
     AuthentificationComponent,
-    MapComponent
+    MapComponent,
+    LoadingWheelComponent
   ],
   imports: [
     BrowserModule,

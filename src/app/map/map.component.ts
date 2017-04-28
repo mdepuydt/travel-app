@@ -12,6 +12,7 @@ declare let google: any;
 })
 export class MapComponent implements OnInit {
 
+  public loading: boolean;
   public latitude: number;
   public longitude: number;
   public zoom: number;
@@ -21,6 +22,7 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.latitude = 0.0000;
     this.longitude = 0.0000;
     this.zoom = 2;
@@ -39,7 +41,7 @@ export class MapComponent implements OnInit {
             })
           }
         );
-        console.log(this.locations)
+        this.loading = false;
       }
     )
   }

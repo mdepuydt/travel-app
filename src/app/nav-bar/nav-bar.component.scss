@@ -2,59 +2,59 @@
 
 /* Button */
 .navbar-btn {
-  background-color: $blue;
+  background-color: $color5;
   border: 0;
-  color: $dark-grey;
+  color: $color1;
 }
 
 .navbar-btn:hover {
-  background-color: $dark-green;
-  color: $white;
+  background-color: $color4;
+  color: $color1;
 }
 
 .navbar-btn:focus {
-  border-color: $dark-green;
-  box-shadow: inset 0 1px 1px $dark-green, 0 0 8px $dark-green;
+  border-color: $color4;
+  box-shadow: inset 0 1px 1px $color4, 0 0 8px $color4;
 }
 
 /* navbar */
 .navbar-default {
-  background-color: $dark-grey;
+  background-color: $color1;
   border: 0;
 }
 
 /* Title */
 .navbar-default .navbar-brand {
-  color: $white;
+  color: $color4;
 }
 
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: $blue;
+  color: $color5;
 }
 
 /* Link */
 .navbar-default .navbar-nav > li > a {
-  color: $blue;
+  color: $color5;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: $dark-green;
+  color: $color4;
 }
 
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: $dark-grey;
-  background-color: $blue;
+  color: $color1;
+  background-color: $color5;
 }
 
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-  color: $dark-grey;
-  background-color: $blue;
+  color: $color1;
+  background-color: $color5;
 }
 
 ///* Caret */

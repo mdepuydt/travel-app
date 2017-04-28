@@ -1,9 +1,22 @@
+@import "../../assets/variables/variables";
+
 agm-map {
   height: 300px;
 }
+
 
 @media (min-height: 650px) {
   img.img-responsive {
 
   }
+}
+
+.pager li > a,
+.pager li > span {
+  background-color: $color1;
+  border-color: $color1;
+}
+
+a {
+  color: $color5;
 }

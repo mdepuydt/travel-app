@@ -1,5 +1,8 @@
 <div class="container">
   <h1>Latest Posts</h1>
+
+  <app-loading-wheel [display]="loading"></app-loading-wheel>
+
   <div class="panel panel-default" *ngFor="let article of articles">
     <div class="panel-body">
       <h2> {{article.title }} </h2>
