@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  host: '78.124.179.97'
+  host: 'localhost'
 };

@@ -9,6 +9,7 @@ import {ArticleService} from './article.service';
 import {AuthentificationService} from './authentification.service';
 import {UsersService} from './users.service';
 import {GeolocationService} from './geolocation.service';
+import {PhotosService} from './photos.service';
 
 import { AppComponent } from './app.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
@@ -43,7 +44,8 @@ import {LoadingWheelComponent} from './loading-wheel/loading-wheel.component';
     ArticleService,
     AuthentificationService,
     UsersService,
-    GeolocationService
+    GeolocationService,
+    PhotosService
   ],
   bootstrap: [AppComponent]
 })

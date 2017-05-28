@@ -3,8 +3,8 @@ export interface Article {
   title: string;
   content: string;
   creationDate: string;
+  photoName?: string;
   photos?: Array<string>;
-  compressedPhotos?: Array<string>;
   location?: Geolocation;
   address?: string;
 }

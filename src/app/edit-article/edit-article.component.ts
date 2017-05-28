@@ -1,19 +1,20 @@
 import {Component, OnInit, NgZone, ViewChild, ElementRef} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
+import {FormControl} from "@angular/forms";
 
+// App Services
 import {ArticleService} from '../article.service';
 import {AuthentificationService} from '../authentification.service';
-import {GeolocationService} from '../geolocation.service';
+import {PhotosService} from '../photos.service';
 
-import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
+// App Interfaces
 import {Article, Geolocation} from  '../article';
 import {User} from '../user';
-import {saveAs} from 'file-saver';
 
+// External libraries
+import {saveAs} from 'file-saver';
 import {MapsAPILoader} from '@agm/core';
 
-//declare var google: any;
-declare var location: any;
 
 @Component({
   selector: 'app-edit-article',
@@ -29,19 +30,16 @@ export class EditArticleComponent implements OnInit {
 
   photos: Array<string> = new Array<string>();
   article: Article;
-  address: string;
   id: number;
   anotherDate = false;
-  anotherLocation = false;
   private sub: any;
   currentUser: User;
-  tmpLocation: Geolocation;
   _imageTooBig = false;
 
 
   constructor(private articleService: ArticleService,
               private authService: AuthentificationService,
-              private geolocationService: GeolocationService,
+              private photoService: PhotosService,
               private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone,
               private router: Router,
@@ -121,14 +119,12 @@ export class EditArticleComponent implements OnInit {
   }
 
   onSave() {
-
     if (!this._imageTooBig) {
       this.save();
-    } else {
-
     }
-
-
+    else {
+      console.log("Impossible to save, image too big");
+    }
   }
 
   onPickAnotherDate() {
@@ -136,12 +132,23 @@ export class EditArticleComponent implements OnInit {
   }
 
   handleInputChange(fileInput) {
+
     this._imageTooBig = false;
     this.photos = [];
+
     if (fileInput.target.files && fileInput.target.files[0]) {
-      console.log(fileInput.target.files[0]);
+
+      // Verify image size
       if (fileInput.target.files[0].size < 3000000) {
         let index = 0;
+
+        // Save image on server side and get back its sanitize name
+        this.photoService.savePhoto(fileInput.target.files[0]).then(name => {
+          this.article.photoName = name.text();
+          console.log('Sanitize name : ' + this.article.photoName);
+        });
+
+        // Display image on miniature
         for (let i = 0; i < fileInput.target.files.length; i++) {
           let reader = new FileReader();
           this.photos.push(i.toString());
@@ -152,25 +159,17 @@ export class EditArticleComponent implements OnInit {
           };
           reader.readAsDataURL(fileInput.target.files[i]);
         }
-      } else {
-        console.log("true");
+      }
+      else {
+        console.log('Image is over maximum size authorized');
         this._imageTooBig = true;
       }
+
     }
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
-  }
-
-  private err() {
-    console.log("Error");
-  }
-  private clearUser() {
-    this.currentUser = {
-      'username': '',
-      'password': ''
-    }
   }
 
   private save() {
@@ -179,22 +178,8 @@ export class EditArticleComponent implements OnInit {
     }
     this.article.location.latitude = this.latitude;
     this.article.location.longitude = this.longitude;
-    this.article.photos = new Array<string>();
-    if (this.photos) {
-      this.photos.forEach(
-        (el) => {
-          let Pic = document.getElementById(el).getAttribute('src');
-          this.article.photos.push(Pic);
-        }
-      );
-    }
     this.articleService.save(this.article).then(art =>
       this.router.navigate(['/list'])
     );
   }
-
-
-
-
-
 }

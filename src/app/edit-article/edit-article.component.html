@@ -4,7 +4,6 @@
     <div class="alert alert-danger" [hidden]="!_imageTooBig">
       <strong>Danger!</strong> The image is too big (>3Mo)
     </div>
-
     <h1>Create an article</h1>
     <form #articleForm="ngForm">
       <div class="form-group">
@@ -21,6 +20,7 @@
         <label for="image">Image</label>
         <!-- TODO handle several photos in input multiple="multiple" -->
         <input type="file" accept="image/*" (change)="handleInputChange($event)"
+               name="file"
                class="form-control"
                id="image">
       </div>

@@ -14,6 +14,7 @@ import {ArticleService} from '../article.service';
 import {AuthentificationService} from '../authentification.service';
 
 import {User} from '../user';
+import {PhotosService} from "../photos.service";
 
 @Component({
   selector: 'app-list-articles',
@@ -34,6 +35,7 @@ export class ListArticlesComponent implements OnInit {
 
   constructor(private articleService: ArticleService,
               private authService: AuthentificationService,
+              private photoService: PhotosService,
               private router: Router) {
     this.clear();
 
@@ -77,6 +79,13 @@ export class ListArticlesComponent implements OnInit {
         console.log(articles);
         this.articles = articles;
         this.total = this.articleService.getTotal();
+        this.articles.forEach(article => {
+          console.log(article.photoName);
+          this.photoService.getPhoto(article.photoName).then(photo => {
+            document.getElementById('mainPhoto').setAttribute('src', photo);
+            //article.photos[0] = photo
+          })
+        });
         this.loading = false;
       });
   }
