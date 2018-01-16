@@ -1,0 +1,23 @@
+{
+  "articles": [    {
+      "title": "Margot à l'étang",
+      "content": "Retour d'ex",
+      "creationDate": "2017-05-28T08:44:37.203Z",
+      "location": {
+        "latitude": 49.41781599999999,
+        "longitude": 2.826144999999997
+      },
+      "photoName": "2015-03-28_10.28.19.jpg",
+      "id": 45
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "mdepuydt",
+      "password": "root",
+      "firstName": "Marion",
+      "lastName": "DEPUYDT"
+    }
+  ]
+}
