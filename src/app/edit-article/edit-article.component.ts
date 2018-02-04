@@ -3,13 +3,13 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {FormControl} from "@angular/forms";
 
 // App Services
-import {ArticleService} from '../article.service';
-import {AuthentificationService} from '../authentification.service';
-import {PhotosService} from '../photos.service';
+import {ArticleService} from '../services/articles/article.service';
+import {AuthenticationService} from '../services/authentication/authentication.service';
+import {PhotosService} from '../services/photos/photos.service';
 
 // App Interfaces
-import {Article, Geolocation} from  '../article';
-import {User} from '../user';
+import {Article, Geolocation} from '../interfaces/article';
+import {User} from '../interfaces/user';
 
 // External libraries
 import {saveAs} from 'file-saver';
@@ -38,7 +38,7 @@ export class EditArticleComponent implements OnInit {
 
 
   constructor(private articleService: ArticleService,
-              private authService: AuthentificationService,
+              private authService: AuthenticationService,
               private photoService: PhotosService,
               private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone,

@@ -7,6 +7,8 @@ export interface Article {
   photos?: Array<string>;
   location?: Geolocation;
   address?: string;
+  latitude?: number,
+  longitude?: number
 }
 
 export interface Geolocation {

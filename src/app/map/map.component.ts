@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Geolocation} from '../article';
-import {ArticleService} from '../article.service';
-import {Article} from '../article';
+import {Geolocation} from '../interfaces/article';
+import {ArticleService} from '../services/articles/article.service';
+import {Article} from '../interfaces/article';
 
 declare let google: any;
 

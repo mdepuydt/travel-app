@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {Observable} from 'rxjs/Observable';
 
-import {User} from './user';
+import {User} from '../../interfaces/user';
 
 @Injectable()
-export class AuthentificationService {
+export class AuthenticationService {
 
   private currentUser: ReplaySubject<User> = new ReplaySubject<User>(1);
 

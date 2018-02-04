@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {AuthentificationService} from '../authentification.service';
-import {UsersService} from '../users.service';
-import {User} from '../user';
+import {AuthenticationService} from '../services/authentication/authentication.service';
+import {UsersService} from '../services/followers/users.service';
+import {User} from '../interfaces/user';
 
 
 @Component({
@@ -11,12 +11,12 @@ import {User} from '../user';
   templateUrl: './authentification.component.html',
   styleUrls: ['authentification.component.scss']
 })
-export class AuthentificationComponent implements OnInit {
+export class AuthenticationComponent implements OnInit {
 
   user: User;
   wrongLogin: boolean = false;
 
-  constructor(private authService: AuthentificationService,
+  constructor(private authService: AuthenticationService,
               private usersService: UsersService,
               private router: Router) {
     this.clear();
@@ -33,7 +33,7 @@ export class AuthentificationComponent implements OnInit {
   }
 
   logIn(user: User) {
-    this.usersService.getUsers().then(
+    this.usersService.getUsers(user.username, user.password).then(
       response => {
         let result: User = response.find(u => u.username == user.username && u.password == user.password);
         if (result != undefined) {

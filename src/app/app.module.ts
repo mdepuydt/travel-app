@@ -5,17 +5,17 @@ import { HttpModule } from '@angular/http';
 import {AgmCoreModule} from "@agm/core";
 import {AppRoutingModule} from './app-routing.module';
 
-import {ArticleService} from './article.service';
-import {AuthentificationService} from './authentification.service';
-import {UsersService} from './users.service';
-import {GeolocationService} from './geolocation.service';
-import {PhotosService} from './photos.service';
+import {ArticleService} from './services/articles/article.service';
+import {AuthenticationService} from './services/authentication/authentication.service';
+import {UsersService} from './services/followers/users.service';
+import {GeolocationService} from './services/geolocation/geolocation.service';
+import {PhotosService} from './services/photos/photos.service';
 
 import { AppComponent } from './app.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {ListArticlesComponent} from './list-articles/list-articles.component';
 import {EditArticleComponent} from './edit-article/edit-article.component';
-import {AuthentificationComponent} from './authentification/authentification.component';
+import {AuthenticationComponent} from './authentification/authentification.component';
 import {MapComponent} from './map/map.component';
 import {LoadingWheelComponent} from './loading-wheel/loading-wheel.component';
 
@@ -25,7 +25,7 @@ import {LoadingWheelComponent} from './loading-wheel/loading-wheel.component';
     NavBarComponent,
     ListArticlesComponent,
     EditArticleComponent,
-    AuthentificationComponent,
+    AuthenticationComponent,
     MapComponent,
     LoadingWheelComponent
   ],
@@ -42,7 +42,7 @@ import {LoadingWheelComponent} from './loading-wheel/loading-wheel.component';
   ],
   providers: [
     ArticleService,
-    AuthentificationService,
+    AuthenticationService,
     UsersService,
     GeolocationService,
     PhotosService

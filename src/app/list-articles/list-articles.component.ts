@@ -9,12 +9,12 @@ import {
 } from '@angular/core';
 import {Router} from '@angular/router';
 
-import {Article, Geolocation} from '../article';
-import {ArticleService} from '../article.service';
-import {AuthentificationService} from '../authentification.service';
+import {Article, Geolocation} from '../interfaces/article';
+import {ArticleService} from '../services/articles/article.service';
+import {AuthenticationService} from '../services/authentication/authentication.service';
 
-import {User} from '../user';
-import {PhotosService} from "../photos.service";
+import {User} from '../interfaces/user';
+import {PhotosService} from "../services/photos/photos.service";
 
 @Component({
   selector: 'app-list-articles',
@@ -34,7 +34,7 @@ export class ListArticlesComponent implements OnInit {
   total: number;
 
   constructor(private articleService: ArticleService,
-              private authService: AuthentificationService,
+              private authService: AuthenticationService,
               private photoService: PhotosService,
               private router: Router) {
     this.clear();

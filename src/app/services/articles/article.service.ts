@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/share';
-import {Article} from './article';
+import {Article} from '../../interfaces/article';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {environment} from '../environments/environment';
+import {environment} from '../../../environments/environment';
 
-const URL = 'http://' + environment.host + ':5000/articles';
+const URL = 'http://' + environment.host + ':' + environment.port;
 
 @Injectable()
 export class ArticleService {
@@ -22,15 +22,15 @@ export class ArticleService {
   }
 
   getArticles(): Promise<Article[]> {
-    return this.http.get(`${URL}?_sort=creationDate&_order=DESC`).toPromise().then(response =>
+    return this.http.get(`${URL}/articles`).toPromise().then(response =>
       response.json());
   }
 
   getPageArticles(page: number, limit: number): Promise<Article[]> {
     const start = (page - 1) * limit;
-    return this.http.get(`${URL}?_sort=creationDate&_order=DESC&_start=${start}&_limit=${limit}`).toPromise().then(response => {
-      console.log(response.headers.get('X-total-count'));
-      this._total = parseInt(response.headers.get('X-total-count'));
+    return this.http.get(`${URL}/articles`).toPromise().then(response => {
+      //console.log(response.headers.get('X-total-count'));
+      //this._total = parseInt(response.headers.get('X-total-count'));
       return response.json();
     });
   }
@@ -42,7 +42,7 @@ export class ArticleService {
   save(article: Article): Promise<Article> {
     return article.id
       ? this.http.put(`${URL}/${article.id}`, article).toPromise().then(response => response.json())
-      : this.http.post(`${URL}`, article).toPromise().then(response => response.json());
+      : this.http.post(`${URL}/article`, article).toPromise().then(response => response.json());
   }
 
   remove(id: number): Promise<void> {

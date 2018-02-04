@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {ListArticlesComponent} from './list-articles/list-articles.component';
 import {EditArticleComponent}   from './edit-article/edit-article.component';
-import {AuthentificationComponent} from './authentification/authentification.component';
+import {AuthenticationComponent} from './authentification/authentification.component';
 import {MapComponent} from './map/map.component';
 
 
@@ -27,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    component: AuthentificationComponent
+    component: AuthenticationComponent
   },
   {
     path: 'map',
