@@ -4,7 +4,7 @@ import {User} from '../../interfaces/user';
 import 'rxjs/add/operator/toPromise';
 import {environment} from '../../../environments/environment';
 
-const URL = 'http://' + environment.host + ':5000/user';
+const URL = 'http://' + environment.host + ':5000/api/user';
 
 @Injectable()
 export class UsersService {

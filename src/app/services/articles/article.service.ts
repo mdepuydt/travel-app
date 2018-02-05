@@ -5,7 +5,7 @@ import {Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {environment} from '../../../environments/environment';
 
-const URL = 'http://' + environment.host + ':' + environment.port;
+const URL = 'http://' + environment.host + ':' + environment.port + '/api';
 
 @Injectable()
 export class ArticleService {

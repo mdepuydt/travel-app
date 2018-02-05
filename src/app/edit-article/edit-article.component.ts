@@ -174,10 +174,12 @@ export class EditArticleComponent implements OnInit {
 
   private save() {
     if (!this.article.creationDate) {
-      this.article.creationDate = (new Date()).toJSON();
+      this.article.creationDate = (new Date()).toISOString();
+    } else {
+      this.article.creationDate = new Date(this.article.creationDate).toISOString();
     }
-    this.article.location.latitude = this.latitude;
-    this.article.location.longitude = this.longitude;
+    this.article.latitude = this.latitude;
+    this.article.longitude = this.longitude;
     this.articleService.save(this.article).then(art =>
       this.router.navigate(['/list'])
     );

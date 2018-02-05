@@ -2,7 +2,7 @@ import {environment} from '../../../environments/environment';
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 
-const URL = 'http://' + environment.host + ':5000/photo';
+const URL = 'http://' + environment.host + ':' + environment.host + '/api';
 
 
 @Injectable()
@@ -19,14 +19,14 @@ export class PhotosService {
     let formData = new FormData();
     formData.append('file', photo);
 
-    return this.http.post(`${URL}`, formData).toPromise().then(response => {
+    return this.http.post(`${URL}/photos`, formData).toPromise().then(response => {
       return response;
     });
   }
 
   getPhoto(photoName: string): Promise<any> {
     console.log(photoName);
-    return this.http.get(`${URL}/${photoName}`).toPromise().then(response => {
+    return this.http.get(`${URL}/photo/${photoName}`).toPromise().then(response => {
       return response.url
     });
   }

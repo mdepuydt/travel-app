@@ -16,7 +16,7 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-CORS(app, resources={r"/article": {"origins": "*"}})
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # Load default config and override config from an environment variable
 app.config.update(dict(
@@ -73,7 +73,7 @@ def formatErrorMessage(data, error_msg):
     return make_response(json.dumps(data), 404)
 
 
-@app.route('/user/<username>/<password>', methods=['GET'])
+@app.route('/api/user/<username>/<password>', methods=['GET'])
 def show_user(username, password):
     db = get_db()
     print(username)
@@ -85,7 +85,7 @@ def show_user(username, password):
     return response
 
 
-@app.route('/articles', methods=['GET'])
+@app.route('/api/articles', methods=['GET'])
 def show_articles():
     db = get_db()
     print('Starting GET articles')
@@ -97,7 +97,7 @@ def show_articles():
     return response
 
 
-@app.route('/article', methods=['POST', 'OPTIONS'])
+@app.route('/api/article', methods=['POST', 'OPTIONS'])
 def post_article():
     if request.method == 'POST':
         print(request.data)
@@ -110,14 +110,14 @@ def post_article():
         # Check is date is already present and well formatted
         if 'creationDate' not in data:
             print('date is not included, current time will be set')
-            print(datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%jZ'))
-            data['creationDate'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%jZ')
+            print(datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%fZ'))
+            data['creationDate'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%fZ')
         else:
             try:
-                datetime.strptime(data['creationDate'], '%Y-%m-%dT%H:%M:%S.%jZ')
+                datetime.strptime(data['creationDate'], '%Y-%m-%dT%H:%M:%S.%fZ')
             except ValueError:
                 # resp.headers.extend(headers or {})
-                return formatErrorMessage(data, "Incorrect data format, should be YYYY-MM-DDThh:mm:ss.%jZ")
+                return formatErrorMessage(data, "Incorrect data format, should be YYYY-MM-DDThh:mm:ss.%fZ")
 
         # Set default value for optional field
         opt_field = ['photoName', 'latitude', 'longitude', 'content']
@@ -158,7 +158,7 @@ def close_db(error):
         CURSOR = None
 
 
-@app.route("/photos", methods=['POST'])
+@app.route("/api/photos", methods=['POST', 'OPTIONS'])
 def postPhoto():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -179,10 +179,19 @@ def postPhoto():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return filename
-    return redirect(request.url)
+        return redirect(request.url)
+    if request.method == 'OPTIONS':
+        data = 'You can post'
+        response = make_response(json.dumps(data), 200)
+        response.headers['Content-type'] = 'application/json'
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Headers'] = 'content-type'
+        print('Options')
+        return response
 
 
-@app.route("/photo/<filename>", methods=['GET'])
+
+@app.route("/api/photo/<filename>", methods=['GET'])
 def getPhoto(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
