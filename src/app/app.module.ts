@@ -18,6 +18,7 @@ import {EditArticleComponent} from './edit-article/edit-article.component';
 import {AuthenticationComponent} from './authentification/authentification.component';
 import {MapComponent} from './map/map.component';
 import {LoadingWheelComponent} from './loading-wheel/loading-wheel.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {LoadingWheelComponent} from './loading-wheel/loading-wheel.component';
     EditArticleComponent,
     AuthenticationComponent,
     MapComponent,
-    LoadingWheelComponent
+    LoadingWheelComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

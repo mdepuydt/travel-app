@@ -2,13 +2,13 @@
 
 /* Button */
 .navbar-btn {
-  background-color: $color5;
+  background-color: $pink;
   border: 0;
   color: $color1;
 }
 
 .navbar-btn:hover {
-  background-color: $color4;
+  background-color: $light-blue;
   color: $color1;
 }
 
@@ -19,28 +19,28 @@
 
 /* navbar */
 .navbar-default {
-  background-color: $color1;
+  background-color: $light-grey;
   border: 0;
 }
 
 /* Title */
 .navbar-default .navbar-brand {
-  color: $color4;
+  color: $grey;
 }
 
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: $color5;
+  color: $pink;
 }
 
 /* Link */
 .navbar-default .navbar-nav > li > a {
-  color: $color5;
+  color: $pink;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: $color4;
+  color: $light-blue;
 }
 
 .navbar-default .navbar-nav > .active > a,
@@ -56,9 +56,3 @@
   color: $color1;
   background-color: $color5;
 }
-
-///* Caret */
-//.navbar-default .navbar-nav > .dropdown > a .caret {
-//    border-top-color: #777;
-//    border-bottom-color: #777;
-//}

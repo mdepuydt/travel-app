@@ -5,12 +5,13 @@ import {ListArticlesComponent} from './list-articles/list-articles.component';
 import {EditArticleComponent}   from './edit-article/edit-article.component';
 import {AuthenticationComponent} from './authentification/authentification.component';
 import {MapComponent} from './map/map.component';
+import {HomeComponent} from './components/home/home.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/list',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'map',
     component: MapComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent
   }
 ];
 

@@ -1,0 +1,17 @@
+@import "../../../assets/variables/variables";
+
+#homepage {
+  background-image: url('~/assets/img/salar.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  background-color: transparent;
+  border: 1px solid $grey;
+}
