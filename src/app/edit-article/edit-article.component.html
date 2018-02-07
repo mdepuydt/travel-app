@@ -1,3 +1,6 @@
+<div *ngIf="!currentUser || !currentUser.firstName" class="alert alert-danger" role="alert">
+  You should be logged to see this content
+</div>
 <div class="container">
   <div *ngIf="currentUser && currentUser.firstName">
 
@@ -49,15 +52,13 @@
           </span>
       </div>
       <div class="form-group">
+        <br>
         <button type="button" [disabled]="!articleForm.form.valid || _imageTooBig" (click)="onSave(article)"
                 class="btn btn-success">Post
         </button>
         <button type="button" (click)="clear()" class="btn btn-primary">Clear</button>
       </div>
     </form>
-  </div>
-  <div *ngIf="!currentUser || !currentUser.firstName" class="alert alert-danger" role="alert">
-    You should be logged to see this content
   </div>
 </div>
 

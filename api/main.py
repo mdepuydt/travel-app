@@ -149,6 +149,28 @@ def post_article():
         return response
 
 
+@app.route('/api/article/<article_id>', methods=['DELETE'])
+def delete_article(article_id):
+  if request.method == 'DELETE':
+    db = get_db()
+    print('Starting DELETE article ' + article_id)
+    db.execute('DELETE FROM articles WHERE id = ?', article_id).fetchall()
+    conn = get_conn()
+    conn.commit()
+    response = make_response(json.dumps({'success': 'article deleted'}), 200)
+    response.headers['Content-type'] = 'application/json'
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    print('Ending DELETE article')
+    return response
+  if request.method == 'OPTIONS':
+    data = 'You can DELETE'
+    response = make_response(json.dumps(data), 200)
+    response.headers['Content-type'] = 'application/json'
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'content-type'
+    print('Options')
+    return response
+
 @app.teardown_appcontext
 def close_db(error):
     """Closes the database again at the end of the request."""

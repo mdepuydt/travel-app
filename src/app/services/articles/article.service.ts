@@ -47,7 +47,7 @@ export class ArticleService {
 
   remove(id: number): Promise<void> {
     console.log(id);
-    return this.http.delete(`${URL}/${id}`).toPromise();
+    return this.http.delete(`${URL}/article/${id}`).toPromise();
   }
 
   savePhoto(photo: any) {
