@@ -1,3 +1,7 @@
+div.container {
+  padding-top: 360px;
+}
+
 .ng-valid[required], .ng-valid.required {
   border-left: 5px solid #42A948; /* green */
 }

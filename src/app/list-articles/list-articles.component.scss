@@ -1,5 +1,9 @@
 @import "../../assets/variables/variables";
 
+div.container {
+  padding-top: 1920px;
+}
+
 agm-map {
   height: 300px;
 }

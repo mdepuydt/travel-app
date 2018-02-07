@@ -31,10 +31,10 @@
       <p>
         {{ article.content}}
       </p>
-      <span *ngIf="article.location">
-        <agm-map [latitude]="article.location.latitude" [longitude]="article.location.longitude" [scrollwheel]="false"
+      <span *ngIf="article.latitude">
+        <agm-map [latitude]="article.latitude" [longitude]="article.longitude" [scrollwheel]="false"
                  [zoom]="zoom">
-          <agm-marker [latitude]="article.location.latitude" [longitude]="article.location.longitude"></agm-marker>
+          <agm-marker [latitude]="article.latitude" [longitude]="article.longitude"></agm-marker>
         </agm-map>
       </span>
     </div>
