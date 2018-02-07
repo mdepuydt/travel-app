@@ -19,6 +19,7 @@ import {AuthenticationComponent} from './authentification/authentification.compo
 import {MapComponent} from './map/map.component';
 import {LoadingWheelComponent} from './loading-wheel/loading-wheel.component';
 import { HomeComponent } from './components/home/home.component';
+import {ForbiddenComponent} from './components/forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HomeComponent } from './components/home/home.component';
     AuthenticationComponent,
     MapComponent,
     LoadingWheelComponent,
-    HomeComponent
+    HomeComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,

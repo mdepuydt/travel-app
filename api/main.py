@@ -89,7 +89,7 @@ def show_user(username, password):
 def show_articles():
     db = get_db()
     print('Starting GET articles')
-    articles = db.execute('SELECT * FROM articles ORDER BY id').fetchall()
+    articles = db.execute('SELECT * FROM articles ORDER BY creationDate').fetchall()
     response = make_response(json.dumps([dict(ix) for ix in articles]), 200)
     response.headers['Content-type'] = 'application/json'
     response.headers['Access-Control-Allow-Origin'] = '*'

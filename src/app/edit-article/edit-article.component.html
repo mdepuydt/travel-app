@@ -1,7 +1,7 @@
-<div *ngIf="!currentUser || !currentUser.firstName" class="alert alert-danger" role="alert">
-  You should be logged to see this content
+<div *ngIf="!currentUser || !currentUser.firstName">
+  <app-forbidden></app-forbidden>
 </div>
-<div class="container">
+<div class="container" *ngIf="currentUser && currentUser.firstName">
   <div *ngIf="currentUser && currentUser.firstName">
 
     <div class="alert alert-danger" [hidden]="!_imageTooBig">
