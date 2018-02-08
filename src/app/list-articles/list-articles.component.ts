@@ -24,7 +24,7 @@ import {PhotosService} from "../services/photos/photos.service";
 export class ListArticlesComponent implements OnInit {
 
   public zoom: number;
-  public loading: boolean
+  public loading: boolean;
   currentUser: User;
   articles: Article[] = [];
   classes: Array<string> = ['hideMap'];

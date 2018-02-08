@@ -36,12 +36,12 @@ export class ArticleService {
   }
 
   getArticle(id: number): Promise<Article> {
-    return this.http.get(`${URL}/${id}`).toPromise().then(response => response.json());
+    return this.http.get(`${URL}/article/${id}`).toPromise().then(response => response.json());
   }
 
   save(article: Article): Promise<Article> {
     return article.id
-      ? this.http.put(`${URL}/${article.id}`, article).toPromise().then(response => response.json())
+      ? this.http.put(`${URL}/article/${article.id}`, article).toPromise().then(response => response.json())
       : this.http.post(`${URL}/article`, article).toPromise().then(response => response.json());
   }
 
