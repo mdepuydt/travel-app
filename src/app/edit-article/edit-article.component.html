@@ -5,17 +5,18 @@
   <div *ngIf="currentUser && currentUser.firstName">
 
     <div class="alert alert-danger" [hidden]="!_imageTooBig">
-      <strong>Danger!</strong> The image is too big (>3Mo)
+      <strong>Danger!</strong> The image is too big (>8Mo)
     </div>
-    <h1>Create an article</h1>
+    <h1 *ngIf="!article.id">Nouvel article</h1>
+    <h1 *ngIf="article.id">Modifier article {{article.id}}</h1>
     <form #articleForm="ngForm">
       <div class="form-group">
-        <label for="title">Title</label>
+        <label for="title">Titre</label>
         <input type="text" class="form-control" id="title" [(ngModel)]="article.title" name="title" #title="ngModel"
                required>
       </div>
       <div class="form-group">
-        <label for="content">Text</label>
+        <label for="content">Description</label>
         <textarea class="form-control" id="content" rows="10" [(ngModel)]="article.content" name="content"
                   #content="ngModel" required></textarea>
       </div>
@@ -32,16 +33,21 @@
              alt="Preview"
              class="img-rounded">
       </div>
+      <div class="alert alert-danger" [hidden]="!_errorLoadingImage">
+        <strong>Error!</strong> An error occurred while loading the image
+      </div>
       <div>
-        <button type="button" (click)="onPickAnotherDate()" class="btn btn-primary">Pick another date</button>
+        <i class="material-icons">date_range</i>
+        <span class="date">{{article.creationDate | date:'mediumDate' }}</span>
+        <button type="button" (click)="onPickAnotherDate()" class="btn btn-primary date">Choisir une autre date</button>
         <input type="date"
                *ngIf="anotherDate"
                class="form-control" id="date"
                [(ngModel)]="article.creationDate" name="date" #date="ngModel"
         >
       </div>
+      <br>
       <div>
-        <span>
         <div class="form-group">
           <input placeholder="Start typing your address..." autocorrect="off" autocapitalize="off" spellcheck="off"
                  type="text" class="form-control" #search [formControl]="searchControl">
@@ -49,7 +55,6 @@
         <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
           <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
         </agm-map>
-          </span>
       </div>
       <div class="form-group">
         <br>

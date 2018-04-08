@@ -28,7 +28,7 @@ export class ArticleService {
 
   getPageArticles(page: number, limit: number): Promise<Article[]> {
     const start = (page - 1) * limit;
-    return this.http.get(`${URL}/articles`).toPromise().then(response => {
+    return this.http.get(`${URL}/articles?limit=${limit}&offset=${start}`).toPromise().then(response => {
       //console.log(response.headers.get('X-total-count'));
       //this._total = parseInt(response.headers.get('X-total-count'));
       return response.json();
@@ -45,14 +45,9 @@ export class ArticleService {
       : this.http.post(`${URL}/article`, article).toPromise().then(response => response.json());
   }
 
-  remove(id: number): Promise<void> {
+  remove(id: number): Promise<Response> {
     console.log(id);
-    return this.http.delete(`${URL}/article/${id}`).toPromise();
-  }
-
-  savePhoto(photo: any) {
-    console.log(photo);
-    this.http.post(`${URL}`, photo).toPromise().then(response => response.json());
+    return this.http.delete(`${URL}/article/${id}`).toPromise().then(res => res.json());
   }
 
 

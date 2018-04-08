@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # UPLOAD_FOLDER = '/home/pi/api/images'
-UPLOAD_FOLDER = 'images'
+UPLOAD_FOLDER = '/Users/marionDepuydt/Documents/repo/Angular2/travel/api/images'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
@@ -89,7 +89,10 @@ def show_user(username, password):
 def show_articles():
     db = get_db()
     print('Starting GET articles')
-    articles = db.execute('SELECT * FROM articles ORDER BY creationDate').fetchall()
+    number = request.args.get('limit', default=5, type=int)
+    offset = request.args.get('offset', default=0, type=int)
+    articles = db.execute('SELECT * FROM articles ORDER BY creationDate DESC LIMIT ? OFFSET ?',
+                          [number, offset]).fetchall()
     response = make_response(json.dumps([dict(ix) for ix in articles]), 200)
     response.headers['Content-type'] = 'application/json'
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -154,7 +157,7 @@ def delete_article(article_id):
   if request.method == 'DELETE':
     db = get_db()
     print('Starting DELETE article ' + article_id)
-    db.execute('DELETE FROM articles WHERE id = ?', article_id).fetchall()
+    db.execute('DELETE FROM articles WHERE id = ?', [article_id]).fetchall()
     conn = get_conn()
     conn.commit()
     response = make_response(json.dumps({'success': 'article deleted'}), 200)
@@ -256,8 +259,9 @@ def postPhoto():
     if request.method == 'OPTIONS':
         data = 'You can post'
         response = make_response(json.dumps(data), 200)
-        response.headers['Content-type'] = 'application/json'
+        response.headers['Content-type'] = '*'
         response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = '*'
         response.headers['Access-Control-Allow-Headers'] = 'content-type'
         print('Options')
         return response

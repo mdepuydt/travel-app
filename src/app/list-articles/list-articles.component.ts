@@ -28,8 +28,10 @@ export class ListArticlesComponent implements OnInit {
   currentUser: User;
   articles: Article[] = [];
   classes: Array<string> = ['hideMap'];
+  _end = false;
+  _loadingNextPosts = false;
 
-  posts: number = 1;
+  posts: number = 5;
   page: number = 1;
   total: number;
 
@@ -59,16 +61,31 @@ export class ListArticlesComponent implements OnInit {
     this.router.navigate(['/edit']);
   }
 
-  newerPosts() {
-    if (this.page > 1) {
-      this.page--;
-      this.fetchArticles();
+  nextPage() {
+    // No need to load next page if the end is already reached
+    if (this._end == false) {
+      this._loadingNextPosts = true;
+      console.log('Load next page');
+      this.page++;
+      this.articleService.getPageArticles(this.page, this.posts).then(
+        articles => {
+          console.log('Yuhou');
+          this._loadingNextPosts = false;
+          if (articles.length > 0) {
+            articles.forEach(art => {
+              this.articles.push(art);
+              this.photoService.getPhoto(art.photoName)
+                .then(photo => {
+                  document.getElementById('mainPhoto_' + art.id).setAttribute('src', photo);
+                })
+            });
+          } else {
+            this._end = true;
+          }
+          console.log(this.articles);
+        }
+      )
     }
-  }
-
-  olderPosts() {
-    this.page++;
-    this.fetchArticles();
   }
 
   private fetchArticles() {
@@ -82,7 +99,7 @@ export class ListArticlesComponent implements OnInit {
         this.articles.forEach(article => {
           console.log(article.photoName);
           this.photoService.getPhoto(article.photoName).then(photo => {
-            document.getElementById('mainPhoto').setAttribute('src', photo);
+            document.getElementById('mainPhoto_' + article.id).setAttribute('src', photo);
             //article.photos[0] = photo
           })
         });

@@ -1,3 +1,4 @@
+<div id="auth">
 <div class="container col-sm-offset-2 col-sm-8">
   <h1 *ngIf="user.firstName"> Hi {{ user.firstName }} {{ user.lastName}}</h1>
   <div class="panel panel-primary ">
@@ -9,9 +10,9 @@
       </div>
       <form class="form-horizontal" #authForm="ngForm">
         <div class="form-group">
-          <label class="col-sm-2 col-sm-offset-2 control-label" for="username">Username</label>
+          <label class="col-sm-2 col-sm-offset-2 control-label" for="username">Pseudo</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" placeholder="Username" id="username"
+            <input type="text" class="form-control" placeholder="Pseudo" id="username"
                    [(ngModel)]="user.username" name="username" #username="ngModel" required>
           </div>
         </div>
@@ -32,4 +33,5 @@
       </form>
     </div>
   </div>
+</div>
 </div>

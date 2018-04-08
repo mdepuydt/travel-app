@@ -19,7 +19,7 @@ import {MapsAPILoader} from '@agm/core';
 @Component({
   selector: 'app-edit-article',
   templateUrl: './edit-article.component.html',
-  styleUrls: ['./edit-article.component.css']
+  styleUrls: ['./edit-article.component.scss']
 })
 export class EditArticleComponent implements OnInit {
 
@@ -35,6 +35,7 @@ export class EditArticleComponent implements OnInit {
   private sub: any;
   currentUser: User;
   _imageTooBig = false;
+  _errorLoadingImage = false;
 
 
   constructor(private articleService: ArticleService,
@@ -59,8 +60,14 @@ export class EditArticleComponent implements OnInit {
       this.id = +params['id']; // (+) converts string 'id' to a number
       if (!isNaN(this.id)) {
         this.articleService.getArticle(this.id).then(
-          art => this.article = art
+          art => {
+            this.article = art;
+            //set current position
+            this.setCurrentPosition();
+          }
         );
+      } else {
+        this.article.creationDate = (new Date()).toISOString();
       }
     });
 
@@ -71,9 +78,6 @@ export class EditArticleComponent implements OnInit {
 
     //create search FormControl
     this.searchControl = new FormControl();
-
-    //set current position
-    this.setCurrentPosition();
 
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
@@ -100,12 +104,20 @@ export class EditArticleComponent implements OnInit {
   }
 
   private setCurrentPosition() {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.zoom = 12;
-      });
+    // In edit/update mode
+    console.log('set current position');
+    console.log(this.article);
+    if (this.article.latitude && this.article.longitude) {
+      this.latitude = this.article.latitude;
+      this.longitude = this.article.longitude;
+    } else { // In create
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          this.latitude = position.coords.latitude;
+          this.longitude = position.coords.longitude;
+          this.zoom = 12;
+        });
+      }
     }
   }
 
@@ -128,37 +140,46 @@ export class EditArticleComponent implements OnInit {
   }
 
   onPickAnotherDate() {
-    this.anotherDate = true;
+    this.anotherDate = !this.anotherDate;
   }
 
   handleInputChange(fileInput) {
 
+    // Init variables
     this._imageTooBig = false;
+    this._errorLoadingImage = false;
     this.photos = [];
 
     if (fileInput.target.files && fileInput.target.files[0]) {
+      this.article.photoName = fileInput.target.files[0].name;
+      console.log(this.article);
 
       // Verify image size
-      if (fileInput.target.files[0].size < 3000000) {
+      if (fileInput.target.files[0].size < 8000000) {
         let index = 0;
 
         // Save image on server side and get back its sanitize name
-        this.photoService.savePhoto(fileInput.target.files[0]).then(name => {
+        this.photoService.savePhoto(fileInput.target.files[0])
+          .then(name => {
+
           this.article.photoName = name.text();
           console.log('Sanitize name : ' + this.article.photoName);
+            // Display image on miniature
+            for (let i = 0; i < fileInput.target.files.length; i++) {
+              let reader = new FileReader();
+              this.photos.push(i.toString());
+              reader.onloadend = function (e: any) {
+                console.log(index.toString());
+                document.getElementById(index.toString()).setAttribute('src', e.target.result);
+                index++;
+              };
+              reader.readAsDataURL(fileInput.target.files[i]);
+            }
+          }).catch(err => {
+          this._errorLoadingImage = true;
+          console.log(err);
+          console.log('ERROR');
         });
-
-        // Display image on miniature
-        for (let i = 0; i < fileInput.target.files.length; i++) {
-          let reader = new FileReader();
-          this.photos.push(i.toString());
-          reader.onloadend = function (e: any) {
-            console.log(index.toString());
-            document.getElementById(index.toString()).setAttribute('src', e.target.result);
-            index++;
-          };
-          reader.readAsDataURL(fileInput.target.files[i]);
-        }
       }
       else {
         console.log('Image is over maximum size authorized');
@@ -173,6 +194,7 @@ export class EditArticleComponent implements OnInit {
   }
 
   private save() {
+    console.log(this.article);
     if (!this.article.creationDate) {
       this.article.creationDate = (new Date()).toISOString();
     } else {

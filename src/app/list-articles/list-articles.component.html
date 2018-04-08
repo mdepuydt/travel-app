@@ -1,49 +1,10 @@
 <div class="container">
-  <h1>Latest Posts</h1>
-
   <app-loading-wheel [display]="loading"></app-loading-wheel>
-
-  <div class="panel panel-default" *ngFor="let article of articles">
-    <div class="panel-body">
-      <h2> {{article.title }} </h2>
-      <h3>
-        <small class="text-right">
-          <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-          {{article.creationDate | date:'short' }}
-        </small>
-        <button *ngIf="currentUser && currentUser.firstName" type="button" class="btn btn-primary btn-sm"
-                [routerLink]="['../edit', article.id]">
-          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-          Edit
-        </button>
-        <button *ngIf="currentUser && currentUser.firstName" type="button" class="btn btn-danger btn-sm"
-                (click)="remove(article.id)">
-          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-          Remove
-        </button>
-      </h3>
-      <span *ngIf="article.photoName">
-        <img id="mainPhoto" src="" class="img-responsive" alt="Responsive image">
-      </span>
-      <span *ngIf="article.photos">
-        <img *ngFor="let photo of article.photos" src="{{photo}}" class="img-responsive" alt="Responsive image">
-      </span>
-      <p>
-        {{ article.content}}
-      </p>
-      <span *ngIf="article.latitude">
-        <agm-map [latitude]="article.latitude" [longitude]="article.longitude" [scrollwheel]="false"
-                 [zoom]="zoom">
-          <agm-marker [latitude]="article.latitude" [longitude]="article.longitude"></agm-marker>
-        </agm-map>
-      </span>
+  <div infiniteScroll (scrolled)='nextPage()' [infiniteScrollDistance]='1'>
+    <div class="my-panel" *ngFor="let article of articles">
+      <app-card [article]="article" [user]="currentUser"></app-card>
     </div>
   </div>
-  <nav aria-label="...">
-    <ul class="pager">
-      <li [class.disabled]="page == 1"><a (click)="newerPosts()"><span aria-hidden="true">&larr;</span> Newer</a></li>
-      <li [class.disabled]="total <= (page * posts)"><a (click)="olderPosts()">Older <span
-        aria-hidden="true">&rarr;</span></a></li>
-    </ul>
-  </nav>
+  <mat-toolbar class="warning width" *ngIf="_loadingNextPosts">Loading next posts...</mat-toolbar>
+  <mat-toolbar class="width" *ngIf="_end">THE END</mat-toolbar>
 </div>

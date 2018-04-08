@@ -2,10 +2,15 @@
 
 div.container {
   padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  max-width: 800px;
+  flex-wrap: nowrap;
+  flex-direction: column;
 }
 
 agm-map {
-  height: 300px;
+  height: 600px;
 }
 
 
@@ -23,4 +28,33 @@ agm-map {
 
 a {
   color: $color5;
+}
+
+.center {
+  text-align: center;
+}
+
+.my-panel {
+  max-width: 800px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+mat-toolbar {
+  background-color: #91cbea;
+  text-align: center;
+  margin-bottom: 10px;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  justify-content: center;
+}
+
+mat-toolbar.warning {
+  background-color: $pink;
+}
+
+.width {
+  max-width: 800px;
 }

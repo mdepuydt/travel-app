@@ -20,6 +20,12 @@ import {MapComponent} from './map/map.component';
 import {LoadingWheelComponent} from './loading-wheel/loading-wheel.component';
 import { HomeComponent } from './components/home/home.component';
 import {ForbiddenComponent} from './components/forbidden/forbidden.component';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {
+  MatButtonModule, MatCardModule, MatListModule, MatProgressSpinnerModule, MatSpinner,
+  MatToolbarModule
+} from "@angular/material";
+import {CardComponent} from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +37,8 @@ import {ForbiddenComponent} from './components/forbidden/forbidden.component';
     MapComponent,
     LoadingWheelComponent,
     HomeComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +50,12 @@ import {ForbiddenComponent} from './components/forbidden/forbidden.component';
       apiKey: "AIzaSyDZ2S6cgODh7I-nqZI0b-_oNgsZrXsOjA0",
       libraries: ["places"]
     }),
+    InfiniteScrollModule,
+    MatCardModule,
+    MatListModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     ArticleService,

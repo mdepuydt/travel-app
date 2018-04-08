@@ -29,16 +29,28 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-### Running unit tests
+## Deployment 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Front-end
 
-### Running end-to-end tests
+`ng build --prod`
+`scp -r dist/* pi@192.168.0.10:/var/www/html/`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+### Back-end
+
+Do not forget to setup properly UPLOAD_FOLDER in main.py
+
+`scp -r api/main.py  pi@192.168.0.10:/home/pi/api/main.py`
+
+```
+export FLASK_APP=main.py
+flask run --host=192.168.0.10
+```
 
 ## Further help
 
 To get more help on Flask check out the [Flask doc](http://flask.pocoo.org/)
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+

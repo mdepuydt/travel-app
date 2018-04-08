@@ -1,3 +1,5 @@
+@import "../../assets/variables/variables";
+
 div.container {
   padding-top: 50px;
 }
@@ -79,4 +81,30 @@ div.container {
 
 agm-map {
   height: 300px;
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.btn-primary, .btn-primary:hover {
+  background-color: $light-blue;
+  border-color: $light-blue;
+}
+
+.btn-success, .btn-success:hover {
+  background-color: $pink;
+  border-color: $pink;
+}
+
+.date {
+  vertical-align: super;
+}
+
+.btn:hover {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }

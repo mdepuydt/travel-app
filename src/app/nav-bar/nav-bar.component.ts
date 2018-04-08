@@ -11,7 +11,7 @@ import {AuthenticationService} from '../services/authentication/authentication.s
 })
 export class NavBarComponent implements OnInit {
 
-  private currentUser: User;
+  currentUser: User;
 
   constructor(private authService: AuthenticationService) {
     this.clear();
