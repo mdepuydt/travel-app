@@ -46,10 +46,6 @@ import {CardComponent} from './components/card/card.component';
     HttpModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: "AIzaSyDZ2S6cgODh7I-nqZI0b-_oNgsZrXsOjA0",
-      libraries: ["places"]
-    }),
     InfiniteScrollModule,
     MatCardModule,
     MatListModule,
